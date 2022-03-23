@@ -12,7 +12,7 @@ app.use(
 
 app.use(express.json());
 
-app.use('/livros', livros)
+app.use('/', livros)
 
 app.get('/', (req, res) => {
     res.json({message: 'Oi Express!'});

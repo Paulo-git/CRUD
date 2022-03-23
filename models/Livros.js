@@ -7,7 +7,7 @@ const Livros = mongoose.model('Livros', {
     sinopse: String,
     capaDura: Boolean,
     codigoISBN: Number,
-    valorLivro: Number,
+    precoLivro: Number,
 })
 
 module.exports = Livros

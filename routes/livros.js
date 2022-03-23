@@ -3,7 +3,7 @@ const { send } = require('express/lib/response');
 const Livros = require('../models/Livros')
 const livrosService = require('../services/livrosService');
 
-router.post('/', async (req, res) => {
+router.post('/adicionarlivro', async (req, res) => {
     const livro = req.body;
     try {
         const serviceReturn = await livrosService.adicionar(livro);
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/', async (req, res) => {
+router.get('/listarlivros', async (req, res) => {
     try {
         const livros = await livrosService.listar();
         
@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
 
 });
 
-router.get('/listar', async (req, res) => {
+router.get('/listarlivro', async (req, res) => {
     const { codigoLivro } = req.body;
     try {
         const { success, msg, livroRetornado } = await livrosService.filtrar(codigoLivro);
@@ -51,7 +51,7 @@ router.get('/listar', async (req, res) => {
     }
 });
 
-router.patch('/', async (req, res) => {
+router.patch('/atualizarlivro', async (req, res) => {
     const livro = req.body;
     try {
         const serviceReturn = await livrosService.atualizar(livro);
@@ -68,7 +68,7 @@ router.patch('/', async (req, res) => {
 
 });
 
-router.delete('/', async (req, res) => {
+router.delete('/removerlivro', async (req, res) => {
     const { codigoLivro } = req.body;
     try {
         const serviceReturn = await livrosService.remover(codigoLivro);
