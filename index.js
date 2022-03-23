@@ -1,8 +1,9 @@
 // configuração inicial
-require('dotenv').config()
-const express = require('express')
-const mongoose = require('mongoose')
-const app = express()
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+const livros = require('./routes/livros');
+const app = express();
 
 // forma de ler JSON / middlewares
 app.use(
@@ -14,9 +15,9 @@ app.use(
 app.use(express.json())
 
 // rotas da API
-const livrosRoutes = require('./routes/livrosRoutes')
 
-app.use('/livros', livrosRoutes)
+
+app.use('/livros', livros)
 
 // rota inicial / endpoint
 app.get('/', (req, res) => {
