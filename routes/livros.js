@@ -3,14 +3,13 @@ const { send } = require('express/lib/response');
 const Livros = require('../models/Livros')
 const livrosService = require('../services/livrosService');
 
-// create
 router.post('/', async (req, res) => {
     const livro = req.body;
     try {
         const serviceReturn = await livrosService.adicionar(livro);
 
         if (!serviceReturn.success) {
-            return res.status(422).send({ errors: serviceReturn.msg });
+            return res.status(422).send({ success: false, errors: serviceReturn.msg });
         }
 
         return res.status(200).send(serviceReturn);
@@ -20,7 +19,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Read - leitura de dados
 router.get('/', async (req, res) => {
     try {
         const livros = await livrosService.listar();
@@ -43,7 +41,7 @@ router.get('/listar', async (req, res) => {
         const { success, msg, livroRetornado } = await livrosService.filtrar(codigoLivro);
 
         if (!success) {
-            return res.status(422).send({ errors: msg });
+            return res.status(422).send({ success: false, errors: msg });
         }
 
         return res.status(200).send(livroRetornado);
@@ -53,14 +51,13 @@ router.get('/listar', async (req, res) => {
     }
 });
 
-// update - atualização de dados
 router.patch('/', async (req, res) => {
     const livro = req.body;
     try {
         const serviceReturn = await livrosService.atualizar(livro);
 
         if (!serviceReturn.success) {
-            return res.status(422).send({ errors: serviceReturn.msg });
+            return res.status(422).send({ success: false, errors: serviceReturn.msg });
         }
 
         return res.status(200).send(serviceReturn);
@@ -71,14 +68,13 @@ router.patch('/', async (req, res) => {
 
 });
 
-// Delete - deletar dados
 router.delete('/', async (req, res) => {
     const { codigoLivro } = req.body;
     try {
         const serviceReturn = await livrosService.remover(codigoLivro);
 
         if (!serviceReturn.success) {
-            return res.status(422).send({ errors: serviceReturn.msg });
+            return res.status(422).send({ success: false, errors: serviceReturn.msg });
         }
 
         return res.status(200).send(serviceReturn);
@@ -87,6 +83,5 @@ router.delete('/', async (req, res) => {
         return res.status(400).send({ success: false, msg: `Houve um erro ao remover o livro: ${error}` });
     }
 });
-
 
 module.exports = router

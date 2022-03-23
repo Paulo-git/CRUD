@@ -118,7 +118,6 @@ filtrar = async (codigoLivro) => {
 
 }
 
-
 module.exports = {
     adicionar,
     remover,
